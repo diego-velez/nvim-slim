@@ -91,10 +91,21 @@ local footer = [[
 ████████████████████████████████████████████████████████████
 ]]
 
+local days_no_nerd_font = {
+  ['0'] = 'Sunday',
+  ['1'] = 'Monday',
+  ['2'] = 'Tuesday',
+  ['3'] = 'Wednesday',
+  ['4'] = 'Thursday',
+  ['5'] = 'Friday',
+  ['6'] = 'Saturday',
+}
+
 local starter = require 'mini.starter'
 starter.setup {
-  header = days[os.date '%w'],
-  footer = footer,
+  header = vim.g.have_nerd_font and days[os.date '%w']
+    or string.format('It is %s!', days_no_nerd_font[os.date '%w']),
+  footer = vim.g.have_nerd_font and footer or 'DVT on Neovim',
   items = {
     starter.sections.recent_files(5, true, false),
     starter.sections.recent_files(10, false, false),

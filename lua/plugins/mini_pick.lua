@@ -1,34 +1,3 @@
--- Use proper slash depending on OS
-local parent_dir_pattern = vim.fn.has 'win32' == 1 and '([^\\/]+)([\\/])' or '([^/]+)(/)'
-
--- Shorten a folder's name
-local shorten_dirname = function(name, path_sep)
-  local first = vim.fn.strcharpart(name, 0, 1)
-  first = first == '.' and vim.fn.strcharpart(name, 0, 2) or first
-  return first .. path_sep
-end
-
--- Shorten one path
--- WARN: This can only be called for MiniPick
-local make_short_path = function(path)
-  local win_id = MiniPick.get_picker_state().windows.main
-  local buf_width = vim.api.nvim_win_get_width(win_id)
-  local char_count = vim.fn.strchars(path)
-  -- Do not shorten the path if it is not needed
-  if char_count < buf_width then
-    return path
-  end
-
-  local shortened_path = path:gsub(parent_dir_pattern, shorten_dirname)
-  char_count = vim.fn.strchars(shortened_path)
-  -- Return only the filename when the shorten path still overflows
-  if char_count >= buf_width then
-    return shortened_path:match(parent_dir_pattern)
-  end
-
-  return shortened_path
-end
-
 require('mini.pick').setup {
   delay = {
     busy = 1,
@@ -117,7 +86,38 @@ require('mini.pick').setup {
 -- See https://github.com/echasnovski/mini.nvim/discussions/1437
 vim.ui.select = MiniPick.ui_select
 
--- Shorten file paths by default
+-- Shorten file paths by default ---
+-- Use proper slash depending on OS
+local parent_dir_pattern = vim.fn.has 'win32' == 1 and '([^\\/]+)([\\/])' or '([^/]+)(/)'
+
+-- Shorten a folder's name
+local shorten_dirname = function(name, path_sep)
+  local first = vim.fn.strcharpart(name, 0, 1)
+  first = first == '.' and vim.fn.strcharpart(name, 0, 2) or first
+  return first .. path_sep
+end
+
+-- Shorten one path
+-- WARN: This can only be called for MiniPick
+local make_short_path = function(path)
+  local win_id = MiniPick.get_picker_state().windows.main
+  local buf_width = vim.api.nvim_win_get_width(win_id)
+  local char_count = vim.fn.strchars(path)
+  -- Do not shorten the path if it is not needed
+  if char_count < buf_width then
+    return path
+  end
+
+  local shortened_path = path:gsub(parent_dir_pattern, shorten_dirname)
+  char_count = vim.fn.strchars(shortened_path)
+  -- Return only the filename when the shorten path still overflows
+  if char_count >= buf_width then
+    return shortened_path:match(parent_dir_pattern)
+  end
+
+  return shortened_path
+end
+
 local show_short_files = function(buf_id, items_to_show, query)
   local short_items_to_show = vim.tbl_map(make_short_path, items_to_show)
   -- TODO: Instead of using default show, replace in order to highlight proper folder and add icons back

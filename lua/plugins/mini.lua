@@ -3,7 +3,9 @@ local now_if_args = vim.fn.argc(-1) > 0 and now or later
 
 -- NOTE: Start mini.icons configuration
 now(function()
-  require('mini.icons').setup()
+  require('mini.icons').setup {
+    style = vim.g.have_nerd_font and 'glyph' or 'ascii',
+  }
   later(MiniIcons.mock_nvim_web_devicons)
   later(MiniIcons.tweak_lsp_kind)
 end)
