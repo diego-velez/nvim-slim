@@ -1,6 +1,14 @@
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('DVT yanky', { clear = true }),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
 -- Smart cursor line
 local smart_cursor = vim.api.nvim_create_augroup('Smart cursor', { clear = true })
 vim.api.nvim_create_autocmd('InsertLeave', {
