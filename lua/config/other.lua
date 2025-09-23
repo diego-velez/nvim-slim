@@ -3,15 +3,6 @@
 vim.diagnostic.config {
   severity_sort = true,
   float = { border = 'rounded', source = 'if_many' },
-  signs = {
-    -- Change diagnostic symbols in the sign column (gutter)
-    text = {
-      [vim.diagnostic.severity.ERROR] = '',
-      [vim.diagnostic.severity.WARN] = '',
-      [vim.diagnostic.severity.HINT] = '',
-      [vim.diagnostic.severity.INFO] = '',
-    },
-  },
   virtual_text = {
     source = 'if_many',
     spacing = 2,
