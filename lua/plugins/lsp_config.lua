@@ -74,41 +74,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
       end, 'LSP: [T]oggle [I]nlay Hints')
     end
-
-    -- [H]ere aka we are *here* in the code
-    map('g?h', function()
-      require('debugprint').debugprint {}
-    end, 'We are [h]ere (below)')
-    map('g?H', function()
-      require('debugprint').debugprint { above = true }
-    end, 'We are [h]ere (above)')
-
-    -- [V]ariable aka this is the value of said variable
-    map('g?v', function()
-      require('debugprint').debugprint { variable = true }
-    end, 'This [v]ariable (below)')
-    map('g?V', function()
-      require('debugprint').debugprint { above = true, variable = true }
-    end, 'This [v]ariable (above)')
-
-    -- [P]rompt aka we want to see the value of user input variable
-    map('g?p', function()
-      require('debugprint').debugprint { variable = true, ignore_treesitter = true }
-    end, '[P]rompt for variable (below)')
-    map('g?P', function()
-      require('debugprint').debugprint { above = true, variable = true, ignore_treesitter = true }
-    end, '[P]rompt for variable (above)')
-
-    -- Other operations
-    map('g?d', function()
-      require('debugprint.printtag_operations').deleteprints()
-    end, '[D]elete all debugprint in current buffer')
-    map('g?t', function()
-      require('debugprint.printtag_operations').toggle_comment_debugprints()
-    end, '[T]oggle debugprint statements')
-    map('g?s', function()
-      MiniPick.builtin.grep({ pattern = 'DEBUGPRINT:' }, nil)
-    end, '[S]earch all debugprint statements')
   end,
 })
 
