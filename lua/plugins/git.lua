@@ -58,25 +58,3 @@ gitsigns.setup {
     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', 'Git [h]unk')
   end,
 }
-
--- Keymaps
-
-vim.keymap.set('n', '<leader>gL', '<cmd>LazyGit<cr>', { desc = 'LazyGit (Project cwd)' })
-vim.keymap.set(
-  'n',
-  '<leader>gl',
-  '<cmd>LazyGitCurrentFile<cr>',
-  { desc = 'LazyGit (current file)' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>gh',
-  '<cmd>LazyGitFilterCurrentFile<cr>',
-  { desc = 'Commit [H]istory (current file)' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>gH',
-  '<cmd>LazyGitFilter<cr>',
-  { desc = 'Commit [H]istory (Project cwd)' }
-)

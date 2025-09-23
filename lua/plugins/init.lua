@@ -76,11 +76,6 @@ end)
 later(function()
   add 'lewis6991/gitsigns.nvim'
 
-  add {
-    source = 'kdheepak/lazygit.nvim',
-    depends = { 'nvim-lua/plenary.nvim' },
-  }
-
   require 'plugins.git'
 end)
 
