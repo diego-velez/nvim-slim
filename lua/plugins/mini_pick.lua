@@ -77,7 +77,7 @@ require('mini.pick').setup {
         col = 0,
       }
     end,
-    prompt_prefix = '󰁔 ',
+    prompt_prefix = vim.g.have_nerd_font and '󰁔 ' or '> ',
     prompt_caret = ' ',
   },
 }
