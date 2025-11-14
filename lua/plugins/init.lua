@@ -32,6 +32,12 @@ now_if_args(function()
       end,
     },
   }
+
+  add {
+    source = 'nvim-treesitter/nvim-treesitter-textobjects',
+    checkout = 'main',
+  }
+
   add 'nvim-treesitter/nvim-treesitter-context'
   add 'folke/ts-comments.nvim'
 
