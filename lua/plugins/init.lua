@@ -124,8 +124,3 @@ later(function()
 
   require('guess-indent').setup()
 end)
-
--- Write files as root
-later(function()
-  add 'lambdalisue/vim-suda'
-end)
